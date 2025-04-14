@@ -1,0 +1,34 @@
+CLASS CardClient
+  INITIALIZE with broker from env
+      SET client with API v2
+      SETUP logging
+      RETRY connect
+      SET regions, card_types, names
+      INIT metrics
+  END
+  FUNCTION generate_card
+      id = random format or invalid
+      name = random or short
+      expiry = random or expired
+      region = random
+      card_type = random
+      VALIDATE schema
+      APPEND to cards
+      RETURN dictionary
+  END
+  FUNCTION publish_cards(count)
+      FOR count iterations
+          card = generate_card()
+          PUBLISH to kyc/card_data
+          UPDATE metrics
+          LOG and PRINT
+          WAIT
+      END
+      SAVE metrics
+  END
+  FUNCTION close
+      STOP loop
+      DISCONNECT
+      LOG metrics
+  END
+END
