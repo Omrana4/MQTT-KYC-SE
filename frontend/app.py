@@ -42,7 +42,15 @@ def stats():
 @app.route("/docs/diagrams/<path:filename>")
 def serve_diagrams(filename):
     """Serve PNGs from docs/diagrams."""
-    return send_from_directory(os.path.join("docs", "diagrams"), filename)
+    try:
+        full_path = os.path.join("docs", "diagrams", filename)
+        if not os.path.exists(full_path):
+            print(f"File not found: {full_path}")
+            return "File not found", 404
+        return send_from_directory(os.path.join("docs", "diagrams"), filename)
+    except Exception as e:
+        print(f"Error serving file {filename}: {e}")
+        return "Error serving file", 500
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
