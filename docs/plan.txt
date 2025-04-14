@@ -1,0 +1,1 @@
+Pipeline: Card Client publishes KYC data to kyc/card_data; Verifier validates and publishes to kyc/result; Analyst stores and analyzes results.
