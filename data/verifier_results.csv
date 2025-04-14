@@ -1,0 +1,26 @@
+id,status,reasons,timestamp,card_type,region
+367024-8132,approved,[],2025-04-14 14:18:26,Amex,US
+882376-5892,approved,[],2025-04-14 14:18:26,Amex,ASIA
+520001-1170,approved,[],2025-04-14 14:18:26,Visa,ASIA
+7914-3177-9473,approved,[],2025-04-14 14:18:27,Amex,US
+711004-1673,approved,[],2025-04-14 14:18:27,MasterCard,ASIA
+4318-8233-1050,rejected,['Card expired'],2025-04-14 14:18:27,Amex,ASIA
+8744-2925-9678,approved,[],2025-04-14 14:18:27,MasterCard,EU
+invalid_id,rejected,['Invalid ID format'],2025-04-14 14:18:28,Amex,ASIA
+876706-9275,approved,[],2025-04-14 14:18:28,Visa,US
+869013-4627,approved,[],2025-04-14 14:18:28,MasterCard,EU
+2952-2667-6484,approved,[],2025-04-14 14:18:28,Amex,EU
+384454-4630,approved,[],2025-04-14 14:18:28,Amex,EU
+5750-9356-5874,rejected,['Card expired'],2025-04-14 14:18:29,Visa,US
+853959-1000,approved,[],2025-04-14 14:18:29,Amex,EU
+208340-2889,approved,[],2025-04-14 14:18:29,Visa,ASIA
+4209-7245-6164,approved,[],2025-04-14 14:18:29,Amex,US
+7179-9241-3536,approved,[],2025-04-14 14:18:29,Amex,EU
+543160-6326,approved,[],2025-04-14 14:18:30,Visa,ASIA
+3265-7806-3782,approved,[],2025-04-14 14:18:30,Visa,ASIA
+6841-6603-2826,approved,[],2025-04-14 14:18:30,Amex,US
+9921-9224-8079,approved,[],2025-04-14 14:18:30,MasterCard,ASIA
+2049-4905-7641,approved,[],2025-04-14 14:18:31,Amex,ASIA
+803329-9282,approved,[],2025-04-14 14:18:31,Visa,ASIA
+5589-3804-1145,approved,[],2025-04-14 14:18:31,MasterCard,US
+2600-2399-6982,approved,[],2025-04-14 14:18:31,Visa,US
