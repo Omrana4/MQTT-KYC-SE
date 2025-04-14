@@ -1,12 +1,12 @@
 # Real-Time KYC Card Verification System
 
 ## Overview
-A real-time KYC verification system using MQTT for card data processing, validation, and analysis, with a Flask-based frontend for monitoring.
+A real-time KYC verification system using MQTT, with a Flask frontend for monitoring card data processing.
 
-- **Card Client**: Generates and publishes card data (~30% edge cases: invalid IDs, short names, expired dates) to `kyc/card_data`.
-- **Verifier**: Validates data and publishes results to `kyc/result`.
-- **Analyst**: Stores results in SQLite, generates visualizations, and exports CSV.
-- **Frontend**: Displays real-time stats and visualizations at `http://localhost:5000`.
+- **Card Client**: Publishes card data (~30% edge cases) to `kyc/card_data`.
+- **Verifier**: Validates data and publishes to `kyc/result`.
+- **Analyst**: Stores results in SQLite, generates visualizations.
+- **Frontend**: Flask dashboard at `http://localhost:5000`.
 
 ## Team
 - Ali: Card Client
@@ -16,41 +16,36 @@ A real-time KYC verification system using MQTT for card data processing, validat
 ## Prerequisites
 - Ubuntu 24
 - Python 3.12
-- Mosquitto MQTT broker
+- Mosquitto
 - SQLite
 
 ## Setup
-1. **Clone Repository**:
+1. **Clone**:
    ```bash
    git clone https://github.com/QuantumBreakz/MQTT-K-Project.git
    cd MQTT-K-Project
    ```
-
-2. **Install Mosquitto**:
+2. **Mosquitto**:
    ```bash
    sudo apt update
    sudo apt install mosquitto mosquitto-clients
    sudo systemctl enable mosquitto
    ```
-
 3. **Configure Mosquitto**:
    ```bash
    sudo nano /etc/mosquitto/conf.d/local.conf
    # Add:
    listener 1883
    allow_anonymous true
-   # Save, then:
    sudo systemctl restart mosquitto
    ```
-
-4. **Set Up Python Environment**:
+4. **Python Environment**:
    ```bash
    python3 -m venv venv
    source venv/bin/activate
    pip install -r requirements.txt
    ```
-
-5. **Create Environment File**:
+5. **Environment**:
    ```bash
    echo 'MQTT_BROKER=localhost
 MQTT_PORT=1883
@@ -58,81 +53,50 @@ MQTT_QOS=1' > .env
    ```
 
 ## Running
-1. **Start Verifier**:
+1. **Verifier**:
    ```bash
    python3 src/verifier/verifier.py
    ```
-
-2. **Start Analyst**:
+2. **Analyst**:
    ```bash
    python3 src/analyst/analyst.py
    ```
-
-3. **Start Card Client** (single instance):
+3. **Card Client**:
    ```bash
    python3 src/card_client/card_client.py --count 30 --sleep 0.15
-   ```
-
-4. **Start Card Client** (multiple instances):
-   ```bash
+   # Multiple:
    python3 src/card_client/card_client.py --count 10 --sleep 0.1 & python3 src/card_client/card_client.py --count 10 --sleep 0.1
    ```
-
-5. **Start Frontend**:
+4. **Frontend**:
    ```bash
    python3 frontend/app.py
    ```
-   Open `http://localhost:5000` to view the dashboard.
+   Open `http://localhost:5000`.
 
 ## Outputs
-- **Logs**:
-  - Card Client: `data/card_client.log`
-  - Verifier: `data/verifier.log`
-  - Analyst: `data/analyst.log`
-- **Data**:
-  - SQLite: `data/kyc_results.db`
-  - CSV: `data/card_metrics.csv`, `verifier_results.csv`, `analysis_results.csv`
-- **Visualizations**:
-  - Pie chart: `docs/diagrams/status_pie.png`
-  - Heatmaps: `docs/diagrams/card_type_heatmap.png`, `region_heatmap.png`
-- **Frontend**:
-  - Dashboard: Real-time stats (total, approved, rejected, rejection rate) and PNGs
-- **Documentation**:
-  - Plan: `docs/plan.txt`
-  - Tests: `docs/test_log.txt`
-  - Pseudocode: `docs/pseudocode.txt`
-  - Flowchart: `docs/flowchart.txt`
-  - UML: `docs/uml.txt`
-  - Report: `docs/report/report.md`
-  - Gantt Chart: `docs/report/gantt.txt`
+- **Logs**: `data/card_client.log`, `verifier.log`, `analyst.log`
+- **Data**: `kyc_results.db`, `card_metrics.csv`, `verifier_results.csv`, `analysis_results.csv`
+- **Visualizations**: `docs/diagrams/status_pie.png`, `card_type_heatmap.png`, `region_heatmap.png`
+- **Frontend**: Real-time stats and PNGs
+- **Docs**: `docs/plan.txt`, `pseudocode.txt`, `flowchart.txt`, `uml.txt`, `docs/report/report.md`, `gantt.png`
 
 ## Results
-- **Statistics**:
-  - Total: 50 cards
-  - Approved: 43
-  - Rejected: 7
-  - Rejection Rate: ~14%
-- **Edge Cases**:
-  - Invalid IDs (`invalid_id`)
-  - Short names (`A`)
-  - Expired dates (e.g., 2024-09-07)
-- **Visualizations**:
-  - Pie chart: Status distribution
-  - Heatmaps: Card type and region analysis
-- **Frontend**:
-  - Displays stats and PNGs, updates every 10s
+- **Stats**: 50 cards, 43 approved, 7 rejected (~14% rejection rate).
+- **Edge Cases**: Invalid IDs, short names, expired dates.
+- **Visualizations**: Pie chart, heatmaps.
+- **Gantt Chart**: `docs/report/gantt.png`
 
 ## Troubleshooting
-- **No Images in Frontend**:
-  - Check `docs/diagrams/` for PNGs.
-  - Run `curl -I http://localhost:5000/docs/diagrams/status_pie.png`.
-  - Verify Flask logs for file errors.
-- **MQTT Errors**:
-  - Ensure Mosquitto is running (`sudo systemctl status mosquitto`).
-  - Check `.env` for correct broker settings.
-- **Database Issues**:
-  - Verify `data/kyc_results.db` exists.
-  - Run `sqlite3 data/kyc_results.db 'SELECT * FROM results LIMIT 5'`.
+- **Images Not Rendering**:
+  - Verify PNGs: `ls docs/diagrams/`.
+  - Check: `curl -I http://localhost:5000/docs/diagrams/status_pie.png`.
+  - Clear cache: Ctrl+Shift+R.
+  - Check Flask logs: `tail -n 10 frontend.log`.
+- **MQTT**:
+  - Check Mosquitto: `sudo systemctl status mosquitto`.
+  - Verify `.env`.
+- **Database**:
+  - Check: `sqlite3 data/kyc_results.db 'SELECT * FROM results LIMIT 5'`.
 
 ## Repository
 [github.com/QuantumBreakz/MQTT-K-Project](https://github.com/QuantumBreakz/MQTT-K-Project)
