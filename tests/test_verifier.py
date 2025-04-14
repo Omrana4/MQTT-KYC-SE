@@ -1,10 +1,15 @@
 import unittest
-from src.verifier import Verifier
+import json
+from unittest.mock import Mock
+from src.verifier.verifier import Verifier  # Correct import path
 from datetime import datetime, timedelta
 
 class TestVerifier(unittest.TestCase):
     def setUp(self):
+        # Instantiate Verifier and mock MQTT client
         self.verifier = Verifier()
+        self.verifier.client = Mock()  # Mock client to avoid MQTT connect
+        self.verifier.setup_logging = Mock()  # Skip logging setup
 
     def test_valid_card(self):
         card = {
@@ -14,7 +19,8 @@ class TestVerifier(unittest.TestCase):
             'region': 'US',
             'card_type': 'Visa'
         }
-        result = self.verifier.verify_card(card)
+        self.verifier.on_message(self.verifier.client, None, Mock(payload=json.dumps(card).encode()))
+        result = self.verifier.results[-1]  # Get the last result
         self.assertEqual(result['status'], 'approved')
         self.assertEqual(result['reasons'], [])
 
@@ -26,7 +32,8 @@ class TestVerifier(unittest.TestCase):
             'region': 'EU',
             'card_type': 'MasterCard'
         }
-        result = self.verifier.verify_card(card)
+        self.verifier.on_message(self.verifier.client, None, Mock(payload=json.dumps(card).encode()))
+        result = self.verifier.results[-1]
         self.assertEqual(result['status'], 'rejected')
         self.assertIn('Invalid ID format', result['reasons'])
 
@@ -38,7 +45,8 @@ class TestVerifier(unittest.TestCase):
             'region': 'ASIA',
             'card_type': 'Amex'
         }
-        result = self.verifier.verify_card(card)
+        self.verifier.on_message(self.verifier.client, None, Mock(payload=json.dumps(card).encode()))
+        result = self.verifier.results[-1]
         self.assertEqual(result['status'], 'rejected')
         self.assertIn('Card expired', result['reasons'])
 
