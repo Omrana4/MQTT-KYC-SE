@@ -5,6 +5,7 @@ import random
 import logging
 import os
 import csv
+import argparse
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from jsonschema import validate, ValidationError
@@ -115,9 +116,14 @@ class CardClient:
         logging.info(f"CardClient closed: {self.metrics}")
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="KYC Card Client")
+    parser.add_argument("--count", type=int, default=30, help="Number of cards to publish")
+    parser.add_argument("--sleep", type=float, default=0.15, help="Sleep time between publishes")
+    args = parser.parse_args()
     try:
         client = CardClient()
-        client.publish_cards()
+        client.publish_cards(count=args.count)  # Update call
+        time.sleep(args.sleep)
         client.close()
     except Exception as e:
         logging.error(f"Error: {e}")
