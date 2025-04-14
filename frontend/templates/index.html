@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYC Verification Dashboard</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>KYC Verification Dashboard</h1>
+        <div class="stats">
+            <h2>Verification Stats</h2>
+            <p>Total Cards: <span id="total">{{ total }}</span></p>
+            <p>Approved: <span id="approved">{{ approved }}</span></p>
+            <p>Rejected: <span id="rejected">{{ rejected }}</span></p>
+            <p>Rejection Rate: <span id="rejection-rate">{{ rejection_rate }}%</span></p>
+        </div>
+        <div class="visualizations">
+            <h2>Visualizations</h2>
+            <div class="gallery">
+                <div class="viz-item">
+                    <h3>Status Distribution</h3>
+                    <img src="/docs/diagrams/status_pie.png" alt="Status Pie Chart">
+                </div>
+                <div class="viz-item">
+                    <h3>Card Type Analysis</h3>
+                    <img src="/docs/diagrams/card_type_heatmap.png" alt="Card Type Heatmap">
+                </div>
+                <div class="viz-item">
+                    <h3>Region Analysis</h3>
+                    <img src="/docs/diagrams/region_heatmap.png" alt="Region Heatmap">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
