@@ -1,0 +1,1 @@
+KYC verification in digital platforms is often slow and susceptible to fraud, hindering user onboarding. Efficient real-time solutions are scarce. This project leverages MQTT for rapid card validation and data analysis to enhance security.
