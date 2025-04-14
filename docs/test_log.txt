@@ -1,0 +1,1 @@
+Pipeline test: Card Client sent 25 cards, Verifier validated, Analyst stored and visualized.
