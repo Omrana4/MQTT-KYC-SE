@@ -1,0 +1,1 @@
+Start -> Load Env -> Init MQTT -> Retry Connect -> Generate Card -> Validate Schema -> Publish -> Log -> Save CSV -> Wait -> Repeat -> Close -> End
