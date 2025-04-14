@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Simulate real-time updates (optional, can connect to API later)
     const updateStats = async () => {
         try {
             const response = await fetch("/stats");
@@ -12,8 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Error updating stats:", error);
         }
     };
-
-    // Update stats every 10 seconds
-    setInterval(updateStats, 10000);
-    updateStats(); // Initial call
+    setInterval(updateStats, 10000); // Update every 10s
+    updateStats();
 });

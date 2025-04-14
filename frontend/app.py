@@ -1,13 +1,8 @@
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, jsonify
 import sqlite3
 import os
 
 app = Flask(__name__)
-
-@app.route('/docs/diagrams/<path:filename>')
-def serve_diagrams(filename):
-    """Serve static PNGs from docs/diagrams."""
-    return send_from_directory(os.path.join('docs', 'diagrams'), filename)
 
 def get_stats():
     """Query kyc_results.db for verification stats."""
@@ -29,7 +24,7 @@ def get_stats():
 
 @app.route("/")
 def dashboard():
-    """Render the KYC dashboard with stats and visualizations."""
+    """Render the KYC dashboard."""
     stats = get_stats()
     return render_template(
         "index.html",
@@ -41,9 +36,13 @@ def dashboard():
 
 @app.route("/stats")
 def stats():
-    """Return JSON stats for JavaScript updates."""
-    return get_stats()
+    """Return JSON stats for real-time updates."""
+    return jsonify(get_stats())
+
+@app.route("/docs/diagrams/<path:filename>")
+def serve_diagrams(filename):
+    """Serve PNGs from docs/diagrams."""
+    return send_from_directory(os.path.join("docs", "diagrams"), filename)
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
-
