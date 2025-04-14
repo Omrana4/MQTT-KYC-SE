@@ -3,6 +3,7 @@ import time
 import json
 import random
 import logging
+import uuid
 import os
 import csv
 import argparse
@@ -28,7 +29,7 @@ class CardClient:
         self.broker = os.getenv("MQTT_BROKER", "localhost")
         self.port = int(os.getenv("MQTT_PORT", 1883))
         self.qos = int(os.getenv("MQTT_QOS", 1))
-        self.client = mqtt.Client(client_id="CardClient", callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
+        self.client = mqtt.Client(client_id=f"CardClient-{uuid.uuid4()}", callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
         self.setup_logging()
         self.cards = []
         self.regions = ["US", "EU", "ASIA", "MEA"]
