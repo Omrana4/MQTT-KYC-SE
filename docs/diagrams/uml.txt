@@ -1,0 +1,1 @@
+CardClient -> kyc/card_data -> Verifier -> kyc/result -> Analyst
