@@ -1,4 +1,3 @@
-import paho.mqtt.client as mqtt
 import time
 import json
 import random
@@ -7,6 +6,7 @@ import uuid
 import os
 import csv
 import argparse
+import paho.mqtt.client as mqtt  # Fix import
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from jsonschema import validate, ValidationError
