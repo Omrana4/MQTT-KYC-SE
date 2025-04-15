@@ -4,10 +4,15 @@ import os
 
 app = Flask(__name__)
 
+# Set absolute path for docs/diagrams
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+DIAGRAMS_DIR = os.path.join(BASE_DIR, "..", "docs", "diagrams")
+
 def get_stats():
     """Query kyc_results.db for verification stats."""
     try:
-        with sqlite3.connect("data/kyc_results.db") as conn:
+        db_path = os.path.join(BASE_DIR, "..", "data", "kyc_results.db")
+        with sqlite3.connect(db_path) as conn:
             cursor = conn.execute("SELECT status, COUNT(*) FROM results GROUP BY status")
             stats = dict(cursor.fetchall())
             total = sum(stats.values())
@@ -43,11 +48,12 @@ def stats():
 def serve_diagrams(filename):
     """Serve PNGs from docs/diagrams."""
     try:
-        full_path = os.path.join("docs", "diagrams", filename)
+        full_path = os.path.join(DIAGRAMS_DIR, filename)
         if not os.path.exists(full_path):
             print(f"File not found: {full_path}")
             return "File not found", 404
-        return send_from_directory(os.path.join("docs", "diagrams"), filename)
+        print(f"Serving file: {full_path}")
+        return send_from_directory(DIAGRAMS_DIR, filename)
     except Exception as e:
         print(f"Error serving file {filename}: {e}")
         return "Error serving file", 500
