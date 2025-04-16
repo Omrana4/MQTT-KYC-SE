@@ -9,9 +9,9 @@ This project implements a real-time Know Your Customer (KYC) card verification s
 - **Frontend**: A Flask-based dashboard at `http://localhost:5000` displays real-time stats (total cards, approved, rejected, rejection rate) and visualizations.
 
 ## Team
-- **Ali**: Card Client (data generation and publishing)
-- **Omran**: Verifier (data validation)
-- **Ahmed**: Analyst (data storage and visualization)
+- **Ash**: Card Client (data generation and publishing)
+- **Alla**: Verifier (data validation)
+- **Mohmmed**: Analyst (data storage and visualization)
 
 ## Prerequisites
 - **Operating System**: Ubuntu 24
