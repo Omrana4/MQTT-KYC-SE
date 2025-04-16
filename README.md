@@ -269,7 +269,7 @@ The system generates the following outputs:
   ```
 
 ## Repository
-[github.com/QuantumBreakz/MQTT-K-Project](https://github.com/QuantumBreakz/MQTT-K-Project)
+[https://github.com/Omrana4/MQTT-KYC-SE)
 
 ## Notes
 - The system is designed for local development. For production, enable MQTT authentication (`allow_anonymous false`) and add TLS.
