@@ -3,9 +3,9 @@
 ## Introduction
 - **Objective**: Build a real-time KYC verification system using MQTT, with a Flask frontend.
 - **Team**:
-  - Ali: Card Client (data generation).
+  - Ash: Card Client (data generation).
   - Omran: Verifier (data validation).
-  - Ahmed: Analyst (data analysis, visualizations).
+  - Mohamed: Analyst (data analysis, visualizations).
 - **Timeline**: April 5–13, 2025 (development), deliverables due April 15–16.
 
 ## System Design
@@ -78,4 +78,4 @@
 - Flowchart: `docs/diagrams/flowchart.txt`
 - UML: `docs/diagrams/uml.txt`
 - Gantt Chart: `docs/report/gantt.png`
-- Repo: [github.com/QuantumBreakz/MQTT-K-Project](https://github.com/QuantumBreakz/MQTT-K-Project)
+- Repo: [github.com/Omrana4/MQTT-KYC-SE](https://github.com/Omrana4/MQTT-KYC-SE)
