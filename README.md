@@ -74,8 +74,8 @@ Follow these steps to set up the project on your local machine.
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/QuantumBreakz/MQTT-K-Project.git
-cd MQTT-KYC-Project
+git clone https://github.com/Omrana4/MQTT-KYC-SE.git
+cd MQTT-KYC-SE
 ```
 
 ### 2. Install Mosquitto MQTT Broker
